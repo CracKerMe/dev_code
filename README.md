@@ -9,14 +9,14 @@
 
 1. IE有一个 window.clipboardData接口设置复制内容,考虑兼容性即可
 2. 最早尝试的是 使用execCommand;
-
+<pre>
     function jsCopy(){  
         var e=document.getElementById("target-dom");//获取目标dom  
         e.select(); //选择对象  
         document.execCommand("Copy"); //执行浏览器复制命令  
         alert("复制成功");  
     }
-
+</pre>
 在 Chrome 60版本并没有生效，直接pass掉
 
 1. clipboard.min.js
