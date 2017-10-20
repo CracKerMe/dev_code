@@ -26,6 +26,7 @@
    博客园等给我的推荐 zeroClipboard 这款插件，看到 flash 止步。毕竟flash这货儿 我不熟，而且逐渐被主流浏览器遗弃，为他默哀一秒，好 时间到
 3. How to resolve this FXXking question
    模拟一个看不见的textarea，获取里面预设的内容信息。show you the code
+   <pre>
        function copyTextToClipboard(value) {
            var textArea = document.createElement("textarea");
            textArea.style.background = 'transparent';//尽量不让用户感知
@@ -41,7 +42,9 @@
            }
            document.body.removeChild(textArea);//去除textarea 容器
          }
-   完美解决我的需求
+   </pre>
+   
+   完美解决我的需求
    Yours Sincerely AppleSun
 
 (二)、 waitting...
