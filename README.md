@@ -47,6 +47,24 @@
    完美解决我的需求
    Yours Sincerely AppleSun
 
-(二)、 waitting...
+(二)、 读写localStorage
+
+<pre>
+    function writeClientStorage(key,val){
+       localStorage.setItem(key, JSON.stringify(val));
+    }
+    function readClientStorage(key){
+        var readValue = localStorage.getItem(key);
+        if(readValue=='undefined' || readValue == null){
+            return null;
+        }else{
+            return JSON.parse(readValue);
+        }
+    }
+</pre>
+
+
+(三)、 waitting...
+
 
 
