@@ -45,10 +45,8 @@
    </pre>
    
    完美解决我的需求
-   Yours Sincerely AppleSun
-
+   
 (二)、 读写localStorage
-
 <pre>
     function writeClientStorage(key,val){
        localStorage.setItem(key, JSON.stringify(val));
@@ -64,7 +62,79 @@
 </pre>
 
 
-(三)、 waitting...
+(三)、 关于随机数
+<pre>
+    //获取不同的随机数
+    function getRandomArrayElements(arr, count) {
+        var shuffled = arr.slice(0),
+            i = arr.length,
+            min = i - count,
+            temp, index;
+        while (i-- > min) {
+            index = Math.floor((i + 1) * Math.random());
+            temp = shuffled[index];
+            shuffled[index] = shuffled[i];
+            shuffled[i] = temp;
+        }
+        return shuffled.slice(min);
+    }
+    
+    // 拟定sort排序规则
+    function sequence(a, b) {
+        if (a > b) {
+            return 1;
+        } else if (a < b) {
+            return -1
+        } else {
+            return 0;
+        }
+    }
+</pre>
+
+(四)、 移动端比较好用的 reset.css
+
+亮点在于 设计稿除以40px 等于 对应的 rem 布局,实际表现良好
+<pre>
+    body,html{height:100%; user-select:none;}
+    html{font-size: 100% !important;}
+    body{-webkit-overflow-scrolling: touch;background:#fafafa;}
+    *{margin:0; padding:0;-webkit-tap-highlight-color:rgba(0,0,0,0);
+    body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form, fieldset,input,textarea,p,blockquote,th,td{margin:0; padding:0; }
+    body, div, ul, li, h1, h2, h3, h4, h5, h6,  input, button, p, a, i {margin:0; padding:0; font-family:PingFang-SC-Regular,sans-serif; font-weight:normal; font-style:normal;}
+    ul,li {list-style:none }
+    h1,h2,h3,h4,h5,h6{font-weight:normal;}
+    table{border-collapse:collapse }
+    img{width:100%; height:auto; display:block; overflow:hidden; border:0; }
+    select, input{vertical-align:middle; _vertical-align:baseline; outline:none;}
+    a{text-decoration:none; outline:0; cursor:pointer; outline:none;}
+    a:active{text-decoration:none;opacity: 0.5;}
+    a:visited{text-decoration:none;opacity: 0.5;}
+    input[type="reset"]::-moz-focus-inner, 
+    input[type="button"]::-moz-focus-inner, 
+    input[type="submit"]::-moz-focus-inner, 
+    input[type="file"]>input[type="button"]::-moz-focus-inner {border:0 none ;padding:0; appearance:none; -moz-appearance:none; -webkit-appearance:none;}
+    input[type="button"], input[type="submit"], input[type="reset"] {-webkit-appearance:none;}
+    textarea{-webkit-appearance:none;resize:none; outline:none;} 
+    @media only screen and (min-width: 351px) {
+    	html {font-size:125%!important/*换算比例：设计稿尺寸除以40所得尺寸即为页面实际尺寸*/}
+    }
+    .clear{clear:both; font-size:0; height:0; overflow:hidden }
+    .clearfix{zoom:1 }
+    .clearfix:after{content:"."; display:block; height:0; clear:both; visibility:hidden }
+    ::-webkit-scrollbar{width:0px;height: 0px;}/*滚动条*/
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */  color:rgba(255,255,255,1);}
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */  color:rgba(255,255,255,1);}
+    input:-ms-input-placeholder,
+    textarea:-ms-input-placeholder{color:rgba(255,255,255,1)}
+    input::-webkit-input-placeholder,
+    textarea::-webkit-input-placeholder{color:rgba(255,255,255,1);}
+</pre>
+
+
+(五)、 waitting...
 
 
 
+
+
+Yours Sincerely AppleSun
