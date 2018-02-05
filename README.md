@@ -9,22 +9,22 @@
 
 1. IE有一个 window.clipboardData接口设置复制内容,考虑兼容性即可
 2. 最早尝试的是 使用execCommand;
-<pre>
+  <pre>
     function jsCopy(){  
         var e=document.getElementById("target-dom");//获取目标dom  
         e.select(); //选择对象  
         document.execCommand("Copy"); //执行浏览器复制命令  
         alert("复制成功");  
     }
-</pre>
-在 Chrome 60版本并没有生效，直接pass掉
+  </pre>
+  在 Chrome 60版本并没有生效，直接pass掉
 
-1. clipboard.min.js
+3. clipboard.min.js
    与其在原生js 一棵树上吊死，不如考虑 jQuery(老夫上去就是一把jQuery)的一些插件啊
    对着 文档一顿操作，初始化插件，需要的地方 布置 data-clipboard-action="copy" data-clipboard-target 然而在我调试的时间内 ，我并未完成 点击复制多个内容 遂放弃 兼容性并未测试，不过 根据官方提供的是Chrome 42+、Firefox 41+、IE 9+、Opera 29+ 并不满足我的需求
-2. 继续 尝试新的姿势
+4. 继续 尝试新的姿势
    博客园等给我的推荐 zeroClipboard 这款插件，看到 flash 止步。毕竟flash这货儿 我不熟，而且逐渐被主流浏览器遗弃，为他默哀一秒，好 时间到
-3. How to resolve this FXXking question
+5. How to resolve this FXXking question
    模拟一个看不见的textarea，获取里面预设的内容信息。show you the code
    <pre>
        function copyTextToClipboard(value) {
@@ -43,9 +43,9 @@
            document.body.removeChild(textArea);//去除textarea 容器
          }
    </pre>
-   
+
    完美解决我的需求
-   
+
 (二)、 读写localStorage
 <pre>
     function writeClientStorage(key,val){
@@ -130,8 +130,61 @@
     textarea::-webkit-input-placeholder{color:rgba(255,255,255,1);}
 </pre>
 
+(五)、 基于jQuery 的 可拖拽
 
-(五)、 waitting...
+​	html：
+
+```html
+<div style="-webkit-user-select: none;-moz-user-select: none;" id="computerMove">点击我拖动</div>
+```
+
+​	css:
+
+```css
+/* 被操作元素需要有定位元素 */
+#computerMove{position: absolute;}
+```
+
+​	javascript:
+
+```javascript
+var $target_dom = $('#computerMove');
+    $target_dom.bind('mousedown', function (event) {
+      // 需要拖动的节点的坐标
+      var offset_x = $(this)[0].offsetLeft;
+      var offset_y = $(this)[0].offsetTop;
+      
+      // 当前视口的大小（保证框题不会超出）
+      var CLIENT_WIDTH = document.documentElement.clientWidth;
+      var CLIENT_HEIGHT = document.documentElement.clientHeight;
+
+      var mouse_x = event.pageX;
+      var mouse_y = event.pageY;
+
+      $(document).bind('mousemove', function(ev){
+        // 鼠标移动的位置
+        var _x = ev.pageX - mouse_x;
+        var _y = ev.pageY - mouse_y;
+        // 定义 不可拖动超出 区间 
+        if(offset_x + _x < 0) { _x = -offset_x; }
+        if(offset_x + _x + $target_dom.width() > CLIENT_WIDTH) { _x = CLIENT_WIDTH - offset_x - $target_dom.width(); }
+        if(offset_y + _y < 0) { _x = -offset_y; }
+        if(offset_y + _y + $target_dom.height() > CLIENT_HEIGHT) { _y = CLIENT_HEIGHT - offset_y - $target_dom.height(); }
+        
+        var now_x = (offset_x + _x) + 'px';
+        var now_y = (offset_y + _y) + 'px';
+        // 设置 DOM 新的 Left Top值
+        $target_dom.css({
+          top: now_y,
+          left: now_x
+        });
+      })
+    });
+    $(document).bind("mouseup", function () {
+      $(this).unbind("mousemove");
+    }); 
+```
+(六)、 waitting...
 
 
 
