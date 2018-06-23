@@ -245,7 +245,7 @@ function shuffle(arr){
 
 
 
-#### (七)、 Bae64
+#### (八)、 Bae64
 
 ```javascript
 var Base64 = {
@@ -329,7 +329,7 @@ var Base64 = {
 }
 ```
 
-#### （八）cookie
+#### （九）cookie
 
 ```javascript
 var GetCookie = {
@@ -352,7 +352,7 @@ var SetCookie = {
 
 
 
-#### （9）对象合并的 Polyfill 写法(Object.assign)
+#### （十）对象合并的 Polyfill 写法(Object.assign)
 
 
 ```javascript
@@ -380,6 +380,58 @@ if (!Object.assign) {
     }
   });
 ```
+
+#### （十一）获取` yy-MM-dd hh:mm:ss` 的标准时间格式
+- 小程序版本 获取` yy-MM-dd hh:mm:ss` 的标准时间格式
+
+```
+const formatTime = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+const formatNumber = n => {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+
+module.exports = {
+  formatTime: formatTime
+}
+
+```
+
+- 原生js 获取` yy-MM-dd hh:mm:ss` 的标准时间格式
+
+
+```
+Date.prototype.Format = function (fmt) {
+  var o = {
+    "M+": this.getMonth() + 1, //月份
+    "d+": this.getDate(), //日
+    "h+": this.getHours(), //小时
+    "m+": this.getMinutes(), //分
+    "s+": this.getSeconds(), //秒
+    "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+    "S": this.getMilliseconds() //毫秒
+  }
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length))
+  }
+  for (var k in o) {
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)))
+  }
+  return fmt
+}
+```
+
+
 
 
 __Yours Sincerely AppleSun__
