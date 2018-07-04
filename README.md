@@ -431,6 +431,38 @@ Date.prototype.Format = function (fmt) {
 }
 ```
 
+#### （十二）获取url参数实例
+
+```
+> url参数符合规范要求(like ?a=1&b=2&c=3)
+ function getQueryString(name) {
+	const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+	const search = window.location.search.split('?')[1] || '';
+	const r = search.match(reg) || [];
+	return r[2];
+}
+> url参数不符合规范要求(like ?a=1&b=2?c=3)
+function GetParams(temp, name) {
+    var theRequest = new Object();
+    var strs = temp.split("&");
+    for (var i = 0; i < strs.length; i++) {
+        theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+    }
+    // 获取 参数对象的指定key 的 value值
+    var result = theRequest[name] || null;
+    return result;
+}
+function getQueryString(name) {
+    // 获取当前 URL参数集
+    var r = decodeURI(window.location.search);
+    var arr1 = r.split("?");
+    arr1.shift();
+    var params = arr1.join("&");
+    var res = GetParams(params, name);
+    return res;
+}
+```
+
 
 
 
