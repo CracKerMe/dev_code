@@ -462,6 +462,26 @@ function getQueryString(name) {
     return res;
 }
 ```
+```
+function downloadFile(fileName, content) {
+
+	var aLink = document.createElement('a');
+
+	var blob = base64Img2Blob(content);
+
+	var evt = document.createEvent("MouseEvents");
+
+	evt.initEvent("click", false, false);//initEvent 不加后两个参数在FF下会报错
+
+	aLink.download = fileName;
+
+	aLink.href = URL.createObjectURL(blob);
+
+	aLink.dispatchEvent(evt);
+
+}
+
+```
 
 
 
