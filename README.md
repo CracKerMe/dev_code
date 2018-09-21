@@ -482,7 +482,31 @@ function downloadFile(fileName, content) {
 }
 
 ```
+#### （十三）掘金式复制拦截
 
+
+```javascript
+document.body.oncopy = event => {
+  event.preventDefault(); // 取消默认的复制事件 
+  let textFont, copyFont = window.getSelection(0).toString(); // 被复制的文字 等下插入
+  // 超过一定长度的文字 就添加版权信息
+  if (copyFont.length > 10) {
+    textFont = copyFont + '\n'
+    + '作者：AppleSun\n'
+    + '链接：'+ window.location.href +'\n'
+    + '来源：博客\n'
+    + '著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。';
+  } else {
+    textFont = copyFont; // 没超过十个字 则采用被复制的内容。
+  }
+  if (event.clipboardData) {
+    return event.clipboardData.setData('text', textFont); // 将信息写入粘贴板
+  } else {
+    // 兼容IE
+    return window.clipboardData.setData("text", textFont);
+  }
+}
+```
 
 
 
