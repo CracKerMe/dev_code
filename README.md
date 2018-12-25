@@ -508,6 +508,30 @@ document.body.oncopy = event => {
 }
 ```
 
+##### 十四点真的非常非常酷
+
+#### （十四）无视浏览器拦截 打开新页面跳转
+```
+// window.titleName 是为了统一 跳转器命名，并且保持随机关系，如果不随机，将只能打开一个页面
+window.titleName = 'search'+(new Date().getTime());
+/*openInNewTab实现：增加用户行为触发*/
+var openInNewTab = function(url) {
+	var a = document.createElement("a");
+	a.setAttribute("href", url);
+	a.setAttribute("target", window.titleName);
+	document.body.appendChild(a);
+	a.click();
+}
+// 更新已打开窗口的url
+function updateNewWindowUrl(url) {
+	var newWindow = window.open(null, window.titleName);
+	newWindow.location.href = url;
+}
+
+// 在click等事件中，先触发`openInNewTab('about:blank')`;
+// 然后获得正确的 newUrl 地址后 `updateNewWindowUrl(newUrl)`;
+```
+
 
 
 __Yours Sincerely AppleSun__
