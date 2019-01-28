@@ -209,7 +209,11 @@ function get_timestamp_diff(timestamps){
   var hourC = distance/hour;
   var minC = distance/minute;
   if(monthC>=1){
-    result = parseInt(monthC)+'月前';
+    if(parseInt(monthC) / 12>=1) {
+      result = parseInt(parseInt(monthC) / 12)+'年前';
+    } else {
+      result = parseInt(monthC)+'月前';
+    }
   }else if(weekC>=1){
     result = parseInt(weekC)+'周前';
   }else if(dayC>=1){
