@@ -334,7 +334,7 @@ var Base64 = {
 ```
 
 #### （九）cookie
-__此处的cookie操作不够严谨，建议参考 ![issues](https://github.com/CracKerMe/dev_code/issues/1)__
+__此处的cookie操作不够严谨，建议参考 [issues](https://github.com/CracKerMe/dev_code/issues/1)__
 
 ```javascript
 var GetCookie = {
