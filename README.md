@@ -513,8 +513,6 @@ document.body.oncopy = event => {
 }
 ```
 
-##### 十四点真的非常非常酷
-
 #### （十四）无视浏览器拦截 打开新页面跳转
 ```
 // window.titleName 是为了统一 跳转器命名，并且保持随机关系，如果不随机，将只能打开一个页面
@@ -537,6 +535,66 @@ function updateNewWindowUrl(url) {
 // 然后获得正确的 newUrl 地址后 `updateNewWindowUrl(newUrl)`;
 ```
 
-
+#### （十五）es5 emit
+```
+var customEvent = (function () {
+    var events = {}
+    function on(evt, handler) {
+        events[evt] = events[evt] || []
+        events[evt].push({
+            handler: handler
+        })
+    }
+    function trigger(evt, args) {
+        if(!events[evt]) {
+            return
+        }
+        for (var i = 0; i < events[evt].length; i++) {
+            events[evt][i].handler(args)
+        }
+    }
+    return {
+        on: on,
+        trigger: trigger
+    }
+})();
+var customObj = new customEvent();
+// listen Event
+customObj.on('CUSTOM_EVENT', function(){
+    // your callback
+});
+// trigger Event
+customObj.trigger('CUSTOM_EVENT');
+```
+#### （十六）localStorage with outdate time
+自定义 LocalStorage 处理（有过期时间功能）
+```
+function customLocalStorage() {
+    this.set = function (key,value) {
+        var curTime = new Date().getTime();
+        localStorage.setItem(key,JSON.stringify({data:value,time:curTime}));
+    }
+    this.get = function (key,exp) {
+        var data = localStorage.getItem(key);
+        if (data) {
+            var dataObj = JSON.parse(data);
+            if(!exp) {
+                var dataObjDatatoJson = dataObj.data
+                return dataObjDatatoJson;
+            }
+            if (new Date().getTime() - dataObj.time>exp) {
+                console.log('信息已过期');
+                // your callbak here
+            }else{
+                var dataObjDatatoJson = dataObj.data
+                return dataObjDatatoJson;
+            }
+        }
+    },
+    this.remove = function (key) {
+        localStorage.removeItem(key);
+    }
+};
+```
 
 __Yours Sincerely AppleSun__
