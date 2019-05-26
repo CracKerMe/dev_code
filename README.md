@@ -597,4 +597,38 @@ function customLocalStorage() {
 };
 ```
 
+#### （十七）获取浏览器经纬度
+```
+function getPosition () {
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        let latitude = position.coords.latitude
+        let longitude = position.coords.longitude
+        let data = {
+          latitude: latitude,
+          longitude: longitude
+        }
+        resolve(data)
+      }, function () {
+        reject(arguments)
+      })
+    } else {
+      reject('你的浏览器不支持当前地理位置信息获取')
+    }
+  })
+}
+/* 调用如下 */
+getPosition().then(result => {
+    let queryData = {
+        longtitude: String(result.longitude).match(/\d+\.\d{0,6}/)[0],
+        latitude: String(result.latitude).match(/\d+\.\d{0,6}/)[0],
+        channelType: '00'
+    }
+    console.log(queryData)
+}).catch(err => {
+    console.log(err)
+})
+```
+
 __Yours Sincerely AppleSun__
