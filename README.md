@@ -436,8 +436,41 @@ Date.prototype.Format = function (fmt) {
 }
 ```
 
-#### （十二）获取url参数实例
+- 做了一层封装
+```
+// format: 0 => 2019-04-29
+// 		1 => 2019-04-29 17:09
+// 		2 => 2019-04-29 17:09:37
+function monment(timestamp, format, divide) {
+	var tempDate = new Date(),
+		result = '',
+		divide = divide || '-';
+	if(!timestamp) {
+		timestamp = new Date().getTime();
+	}
+	tempDate.setTime(timestamp);
+	var year = tempDate.getFullYear()
+	var month = paddingLeftZero(tempDate.getMonth() + 1)
+	var day = paddingLeftZero(tempDate.getDate())
+	var hour = paddingLeftZero(tempDate.getHours())
+	var minute = paddingLeftZero(tempDate.getMinutes())
+	var second = paddingLeftZero(tempDate.getSeconds())
+	switch (format) {
+		case 0:
+			result = year+divide+month+divide+day;
+			break;
+		case 1:
+			result = year+divide+month+divide+day+' '+hour+':'+minute;
+			break;
+		case 2:
+			result = year+divide+month+divide+day+' '+hour+':'+minute+':'+second;
+			break;
+	}
+	return result
+}
+```
 
+#### （十二）获取url参数实例
 ```
 > url参数符合规范要求(like ?a=1&b=2&c=3)
  function getQueryString(name) {
@@ -467,6 +500,8 @@ function getQueryString(name) {
     return res;
 }
 ```
+
+#### （十三）下载图片文件 base64
 ```
 function downloadFile(fileName, content) {
 
@@ -487,9 +522,8 @@ function downloadFile(fileName, content) {
 }
 
 ```
-#### （十三）掘金式复制拦截
 
-
+#### （十四）掘金式复制拦截
 ```javascript
 document.body.oncopy = event => {
   event.preventDefault(); // 取消默认的复制事件 
@@ -513,7 +547,7 @@ document.body.oncopy = event => {
 }
 ```
 
-#### （十四）无视浏览器拦截 打开新页面跳转
+#### （十五）无视浏览器拦截 打开新页面跳转
 ```
 // window.titleName 是为了统一 跳转器命名，并且保持随机关系，如果不随机，将只能打开一个页面
 window.titleName = 'search'+(new Date().getTime());
@@ -535,7 +569,7 @@ function updateNewWindowUrl(url) {
 // 然后获得正确的 newUrl 地址后 `updateNewWindowUrl(newUrl)`;
 ```
 
-#### （十五）es5 emit
+#### （十六）es5 emit
 ```
 var customEvent = (function () {
     var events = {}
@@ -566,7 +600,8 @@ customObj.on('CUSTOM_EVENT', function(){
 // trigger Event
 customObj.trigger('CUSTOM_EVENT');
 ```
-#### （十六）localStorage with outdate time
+
+#### （十七）localStorage with outdate time
 自定义 LocalStorage 处理（有过期时间功能）
 ```
 function customLocalStorage() {
@@ -597,7 +632,7 @@ function customLocalStorage() {
 };
 ```
 
-#### （十七）获取浏览器经纬度
+#### （十八）获取浏览器经纬度
 ```
 function getPosition () {
   return new Promise((resolve, reject) => {
