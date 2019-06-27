@@ -666,4 +666,15 @@ getPosition().then(result => {
 })
 ```
 
+#### (十九) 是否是爬虫
+```
+function isSprider (str) {
+  if(/adsbot|googlebot|bingbot|msnbot|yandexbot|baidubot|robot|careerbot|seznambot|bot|baiduspider|jikespider|symantecspider|scanner|webcrawler|crawler|Sogou+web+spider/i.test(str)) {
+    return true
+  } else {
+    return false
+  }
+}
+```
+
 __Yours Sincerely AppleSun__
