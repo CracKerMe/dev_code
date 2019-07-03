@@ -677,4 +677,22 @@ function isSprider (str) {
 }
 ```
 
+#### (二十)下载图片
+```
+function downloadFile(fileName, url) {
+  if (isIE()) {
+    window.open(url)
+  } else {
+    var iframe = document.createElement("iframe");
+    iframe.style.display = "none";
+    iframe.style.height = 0;
+    iframe.src = url; 
+    document.body.appendChild(iframe);
+    setTimeout(function() {
+      iframe.remove();
+    }, 5 * 60 * 1000);
+  }
+};
+```
+
 __Yours Sincerely AppleSun__
