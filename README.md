@@ -695,4 +695,17 @@ function downloadFile(fileName, url) {
 };
 ```
 
+#### (二十一)是否是微信内核 是否是QQ内核
+```
+function isWeixin () { //判断是否是微信
+  var ua = navigator.userAgent.toLowerCase();
+  return ua.match(/microMessenger/i) == "micromessenger";
+};
+function isQQBrowser () { //判断是否是QQ浏览器
+  var ua = navigator.userAgent.toLowerCase();
+  /* qbwebviewtype特指ios版的手Q */
+  return !!ua.match(/mqqbrowser|qzone|qqbrowser|qbwebviewtype/i);
+};
+```
+
 __Yours Sincerely AppleSun__
