@@ -571,7 +571,7 @@ function updateNewWindowUrl(url) {
 
 #### （十六）es5 emit
 ```
-var customEvent = (function () {
+var CustomEvent = (function () {
     var events = {}
     function on(evt, handler) {
         events[evt] = events[evt] || []
@@ -592,13 +592,12 @@ var customEvent = (function () {
         trigger: trigger
     }
 })();
-var customObj = new customEvent();
 // listen Event
-customObj.on('CUSTOM_EVENT', function(){
-    // your callback
+CustomEvent.on('CUSTOM_EVENT', function(){
+    // your callback here
 });
 // trigger Event
-customObj.trigger('CUSTOM_EVENT');
+CustomEvent.trigger('CUSTOM_EVENT');
 ```
 
 #### （十七）localStorage with outdate time
