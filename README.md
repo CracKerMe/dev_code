@@ -707,4 +707,17 @@ function isQQBrowser () { //判断是否是QQ浏览器
 };
 ```
 
+#### (二十二)JS精度丢失
+```
+/* e.g: */
+0.1+0.2
+/* 结果返回 0.30000000000000004 */
+
+strip(0.1+0.2)
+/* 结果返回 0.3 */
+function strip(num, precision = 12) {
+  return +parseFloat(num.toPrecision(precision));
+}
+```
+
 __Yours Sincerely AppleSun__
