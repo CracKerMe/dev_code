@@ -732,4 +732,11 @@ console.log("%c           %c您的选择, %c我们的荣耀", "background:url(ht
 console.log('\n %c 已找到工作了,针对博客有啥想交流的,联系QQ: 1160948478 \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-radius:5px;');
 ```
 
+```
+/* 当天0点0分0秒 */
+new Date(new Date(new Date().toLocaleDateString()).getTime());
+/* 当天23点59分59秒 */
+new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
+```
+
 __Yours Sincerely AppleSun__
