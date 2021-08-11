@@ -739,4 +739,15 @@ new Date(new Date(new Date().toLocaleDateString()).getTime());
 new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 ```
 
+#### (二十四) 手写骨架屏css 
+```
+<div class="skeleton-text"></div>
+
+.skeleton-text {background: linear-gradient(90deg,#f2f2f2 25%,#e6e6e6 37%,#f2f2f2 63%);background-size: 400% 100%;animation: skeleton-loading 1.4s ease infinite;height: 22px;}
+@keyframes skeleton-loading {
+  0% {background-position: 100% 50%;}
+  100% {background-position: 0 50%;}
+}
+```
+
 __Yours Sincerely AppleSun__
