@@ -750,4 +750,35 @@ new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 }
 ```
 
+#### (二十五) 粘贴板更新 2024 - 读取剪贴板内容（支持富文本）
+
+2024年 使用现代 Clipboard API `navigator.clipboard.read()` 可以读取剪贴板中的多种类型数据（图片、文本等），可以很好的获取来自 Word 等内容，以便于做富文本解析等
+
+```javascript
+async function getClipboardContents() {
+  try {
+    const clipboardItems = await navigator.clipboard.read();
+    for (const clipboardItem of clipboardItems) {
+      for (const type of clipboardItem.types) {
+        const blob = await clipboardItem.getType(type);
+        if (blob.type.startsWith('image/')) {
+          // 处理图片
+          const imageUrl = URL.createObjectURL(blob);
+          console.log('图片 URL：', imageUrl);
+        } else if (blob.type.startsWith('text/')) {
+          // 处理文本
+          const text = await blob.text();
+          console.log('文本内容：', text);
+        } else {
+          // 处理其他类型数据
+          console.log('其他类型数据：', blob.type, blob);
+        }
+      }
+    }
+  } catch (err) {
+    console.error('读取剪贴板内容时出错：', err);
+  }
+}
+```
+
 __Yours Sincerely AppleSun__
